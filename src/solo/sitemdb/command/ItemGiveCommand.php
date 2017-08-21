@@ -48,7 +48,7 @@ class ItemGiveCommand extends SItemDBCommand{
       }
       return true;
     }
-    $item = clone $info->getItem();
+    $item = $info->getItem();
     $count = $args[2] ?? $item->getMaxStackSize();
     if(!is_numeric($count)){
       $sender->sendMessage(SItemDB::$prefix . "수량은 숫자를 입력해주세요.");

@@ -29,20 +29,18 @@ class ItemCopyCommand extends SItemDBCommand{
       $sender->sendMessage(SItemDB::$prefix . "이 명령을 사용할 권한이 없습니다.");
       return true;
     }
-    $itemInHand = $sender->getInventory()->getItemInHand();
-    if($itemInHand->getId() === Item::AIR){
+    $item = $sender->getInventory()->getItemInHand();
+    if($item->getId() === Item::AIR){
       $sender->sendMessage(SItemDB::$prefix . "아이템을 손에 든 후 명령을 실행해주세요.");
       return true;
     }
-    $count = $args[0] ?? $itemInHand->getMaxStackSize();
-    if(!is_numeric($count)){
+    $count = intval($args[0]) ?? $item->getMaxStackSize();
+    if(!preg_match("/[0-9]+/", $count) || $count < 1){
       $sender->sendMessage(SItemDB::$prefix . "수량은 숫자로 입력해주세요.");
       return true;
     }
 
-    $copied = clone $itemInHand;
-    $copied->setCount($count);
-    $sender->getInventory()->addItem($copied);
+    $sender->getInventory()->addItem(Item::get($item->getId(), $item->getDamage(), $count, $item->getCompoundTag()));
     $sender->sendMessage(SItemDB::$prefix . "아이템을 " . $count . "개 만큼 복제하였습니다.");
 
     return true;

@@ -20,8 +20,7 @@ class ItemInfo implements \JsonSerializable{
     }else{
       $this->name = $item->getName();
     }
-    $item->setCount(1);
-    $this->item = clone $item;
+    $this->item = Item::get($item->getId(), $item->getDamage(), 1, $item->getCompoundTag());
     $this->description = $description ?? "";
   }
 
@@ -30,7 +29,7 @@ class ItemInfo implements \JsonSerializable{
   }
 
   public function getItem() : Item{
-    return $this->item;
+    return Item::get($this->item->getId(), $this->item->getDamage(), 1, $this->item->getCompoundTag());
   }
 
   public function getDescription() : string{

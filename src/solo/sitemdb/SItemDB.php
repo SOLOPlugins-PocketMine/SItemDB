@@ -81,7 +81,7 @@ class SItemDB extends PluginBase{
 
   public function getItem(string $name){
     if(($info = $this->getItemInfo($name)) !== null){
-      return clone $info->getItem();
+      return $info->getItem();
     }
     return null;
   }
