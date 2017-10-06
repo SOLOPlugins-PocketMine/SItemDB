@@ -91,7 +91,7 @@ class SItemDB extends PluginBase{
     // Parse : id or id:data
     if($item === null){
       $item = Item::fromString($input); // PocketMine parse
-      if($item->getId() == Item::AIR){
+      if($item->getId() === Item::AIR){
         return null;
       }
     }
