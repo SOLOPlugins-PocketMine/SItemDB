@@ -46,8 +46,8 @@ class ItemInfo implements \JsonSerializable{
 
   public static function jsonDeserialize(array $data){
     $id = intval($data["item"]["id"]);
-    $damage = intval($data["item"]["damage"]);
-    $count = intval($data["item"]["count"]);
+    $damage = intval($data["item"]["damage"] ?? 0);
+    $count = intval($data["item"]["count"] ?? 1);
     $nbt = "";
     if(isset($data["item"]["nbt"])){
       $nbt = $data["item"]["nbt"];
@@ -57,8 +57,8 @@ class ItemInfo implements \JsonSerializable{
     $item = Item::get($id, $damage, $count, $nbt);
     return new ItemInfo(
       $item,
-      $data["name"],
-      $data["description"]
+      $data["name"] ?? null,
+      $data["description"] ?? null
     );
   }
 }
