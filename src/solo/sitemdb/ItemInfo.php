@@ -6,10 +6,13 @@ use pocketmine\item\Item;
 
 class ItemInfo implements \JsonSerializable{
 
+  /** @var string */
   protected $name;
 
+  /** @var Item */
   protected $item;
 
+  /** @var string */
   protected $description;
 
   public function __construct(Item $item, string $customName = null, string $description = null){
