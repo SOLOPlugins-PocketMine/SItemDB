@@ -3,12 +3,12 @@
 namespace solo\sitemdb\command;
 
 use pocketmine\Player;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 
 use solo\sitemdb\SItemDB;
-use solo\sitemdb\SItemDBCommand;
 
-class ItemGiveCommand extends SItemDBCommand{
+class ItemGiveCommand extends Command{
 
   private $owner;
 
@@ -19,7 +19,7 @@ class ItemGiveCommand extends SItemDBCommand{
     $this->owner = $owner;
   }
 
-  public function _execute(CommandSender $sender, string $label, array $args) : bool{
+  public function execute(CommandSender $sender, string $label, array $args) : bool{
     if(!isset($args[1])){
       $sender->sendMessage(SItemDB::$prefix . "사용법 : " . $this->getUsage());
       return true;

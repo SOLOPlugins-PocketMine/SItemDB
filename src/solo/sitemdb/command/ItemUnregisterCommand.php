@@ -3,13 +3,13 @@
 namespace solo\sitemdb\command;
 
 use pocketmine\Player;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Item;
 
 use solo\sitemdb\SItemDB;
-use solo\sitemdb\SItemDBCommand;
 
-class ItemUnregisterCommand extends SItemDBCommand{
+class ItemUnregisterCommand extends Command{
 
   private $owner;
 
@@ -20,7 +20,7 @@ class ItemUnregisterCommand extends SItemDBCommand{
     $this->owner = $owner;
   }
 
-  public function _execute(CommandSender $sender, string $label, array $args) : bool{
+  public function execute(CommandSender $sender, string $label, array $args) : bool{
     if(!$sender->hasPermission($this->getPermission())){
       $sender->sendMessage(SItemDB::$prefix . "이 명령을 사용할 권한이 없습니다.");
       return true;

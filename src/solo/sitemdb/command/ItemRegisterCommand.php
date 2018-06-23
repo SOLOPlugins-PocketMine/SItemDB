@@ -3,13 +3,13 @@
 namespace solo\sitemdb\command;
 
 use pocketmine\Player;
+use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\Item;
 
 use solo\sitemdb\SItemDB;
-use solo\sitemdb\SItemDBCommand;
 
-class ItemRegisterCommand extends SItemDBCommand{
+class ItemRegisterCommand extends Command{
 
   private $owner;
 
@@ -20,7 +20,7 @@ class ItemRegisterCommand extends SItemDBCommand{
     $this->owner = $owner;
   }
 
-  public function _execute(CommandSender $sender, string $label, array $args) : bool{
+  public function execute(CommandSender $sender, string $label, array $args) : bool{
     if(!$sender instanceof Player){
       $sender->sendMessage(SItemDB::$prefix . "인게임에서만 사용할 수 있습니다.");
       return true;
